@@ -2,35 +2,55 @@ import numpy as np
 import cv2
 # import imutils
 
+def main():
+    cap = cv2.VideoCapture(0)
 
-cap = cv2.VideoCapture(0)
+    while(True):
 
-while(True):
+        ret,frame = cap.read()
+        # gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+        hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
 
-    ret,frame = cap.read()
-    # gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-    hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+        # of red
+        lower_red = np.array([0, 110, 110])
+        upper_red = np.array([10, 255, 255])
 
-    # of red
-    lower_red = np.array([0, 110, 110])
-    upper_red = np.array([0, 255, 255])
+        # of blue
+        lower_blue = np.array([110, 50, 50])
+        upper_blue = np.array([130, 255, 255])
 
-    # of blue
-    lower_blue = np.array([110, 50, 50])
-    upper_blue = np.array([130, 255, 255])
+        # of green
+        lower_green = np.array([30, 50, 0])
+        upper_green = np.array([100, 255, 150])
 
-    mask_red = cv2.inRange(hsv, lower_red, upper_red)
-    mask_blue = cv2.inRange(hsv, lower_blue, upper_blue)
+        # of yellow
+        lower_yellow = np.array([10, 200, 150])
+        upper_yellow = np.array([255, 255, 255])
 
-    res = cv2.bitwise_and(frame,frame, mask=mask_red)
+
+        mask_red = cv2.inRange(hsv, lower_red, upper_red)
+        mask_blue = cv2.inRange(hsv, lower_blue, upper_blue)
+        mask_green = cv2.inRange(hsv, lower_green, upper_green)
+        mask_yellow = cv2.inRange(hsv, lower_yellow, upper_yellow)
+
+        res_red = cv2.bitwise_and(frame,frame, mask=mask_red)
+        res_blue = cv2.bitwise_and(frame,frame, mask=mask_blue)
+        res_green = cv2.bitwise_and(frame,frame, mask=mask_green)
+        res_yellow = cv2.bitwise_and(frame,frame, mask=mask_yellow)
 
 
-    cv2.imshow('frame', frame)
-    cv2.imshow('mask_red', mask_red)
-    cv2.imshow('mask_blue', mask_blue)
-    cv2.imshow('res', res)
-    if cv2.waitKey(1) & 0xFF == ord('q'):
-        break
+        cv2.imshow('frame', frame)
+        # cv2.imshow('mask_red', mask_red)
+        # cv2.imshow('mask_blue', mask_blue)
+        cv2.imshow('res_red', res_red)
+        cv2.imshow('res_blue', res_blue)
+        cv2.imshow('res_green', res_green)
+        cv2.imshow('res_yellow', res_yellow)
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            break
 
-cap.release()
-cv2.destroyAllWindows()
+    cap.release()
+    cv2.destroyAllWindows()
+
+if __name__ == "__main__" :
+    main()
