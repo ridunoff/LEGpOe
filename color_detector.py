@@ -9,7 +9,8 @@ def main():
 
         ret,frame = cap.read()
         # gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-        hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+        blurred_frame = cv2.GaussianBlur(frame.copy(), (5,5), 0)
+        hsv = cv2.cvtColor(blurred_frame, cv2.COLOR_BGR2HSV)
 
         # of red
         lower_red = np.array([0, 110, 110])
@@ -29,23 +30,33 @@ def main():
 
 
         mask_red = cv2.inRange(hsv, lower_red, upper_red)
-        mask_blue = cv2.inRange(hsv, lower_blue, upper_blue)
-        mask_green = cv2.inRange(hsv, lower_green, upper_green)
-        mask_yellow = cv2.inRange(hsv, lower_yellow, upper_yellow)
+        # mask_blue = cv2.inRange(hsv, lower_blue, upper_blue)
+        # mask_green = cv2.inRange(hsv, lower_green, upper_green)
+        # mask_yellow = cv2.inRange(hsv, lower_yellow, upper_yellow)
+
+        contours, _ = cv2.findContours(mask_red, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
+
+        for each in contours:
+            area = cv2.contourArea(each)
+            # frame, contours, all of them, (green), thikness=3
+            if area > 1000:
+                cv2.drawContours(frame, contours, -1, (0, 255, 0), 3)
+
+
 
         res_red = cv2.bitwise_and(frame,frame, mask=mask_red)
-        res_blue = cv2.bitwise_and(frame,frame, mask=mask_blue)
-        res_green = cv2.bitwise_and(frame,frame, mask=mask_green)
-        res_yellow = cv2.bitwise_and(frame,frame, mask=mask_yellow)
+        # res_blue = cv2.bitwise_and(frame,frame, mask=mask_blue)
+        # res_green = cv2.bitwise_and(frame,frame, mask=mask_green)
+        # res_yellow = cv2.bitwise_and(frame,frame, mask=mask_yellow)
 
 
         cv2.imshow('frame', frame)
         # cv2.imshow('mask_red', mask_red)
         # cv2.imshow('mask_blue', mask_blue)
         cv2.imshow('res_red', res_red)
-        cv2.imshow('res_blue', res_blue)
-        cv2.imshow('res_green', res_green)
-        cv2.imshow('res_yellow', res_yellow)
+        # cv2.imshow('res_blue', res_blue)
+        # cv2.imshow('res_green', res_green)
+        # cv2.imshow('res_yellow', res_yellow)
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
 
