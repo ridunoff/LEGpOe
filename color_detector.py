@@ -2,8 +2,11 @@ import numpy as np
 import cv2
 # import imutils
 
+
+
 def main():
     cap = cv2.VideoCapture(0)
+    current_lego = []
 
     while(True):
 
@@ -71,7 +74,9 @@ def main():
             cv2.circle(frame, (int(x), int(y)), int(radius), (0,255,255), 2)
             cv2.circle(frame, red_center, 5, (0, 0, 255), -1)
             red_coordinates.append(red_center[1])
-            print("red")
+            if "red" != current_lego[0]:
+                current_lego[0] = "red"
+                print("red")
 
 
 
@@ -83,7 +88,9 @@ def main():
             cv2.circle(frame, (int(x), int(y)), int(radius), (0,255,255), 2)
             cv2.circle(frame, blue_center, 5, (0, 0, 255), -1)
             blue_coordinates.append(blue_center[1])
-            print("blue")
+            if "blue" != current_lego[0]:
+                current_lego[0] = "blue"
+                print("blue")
         elif len(contours_green) > 0:
             c = max(contours_green, key=cv2.contourArea)
             ((x,y), radius) = cv2.minEnclosingCircle(c)
@@ -92,7 +99,9 @@ def main():
             cv2.circle(frame, (int(x), int(y)), int(radius), (0,255,255), 2)
             cv2.circle(frame, green_center, 5, (0, 0, 255), -1)
             green_coordinates.append(green_center[1])
-            print("green")
+            if "grenn" != current_lego[0]:
+                current_lego[0] = "green"
+                print("grenn")
         elif len(contours_yellow) > 0:
             c = max(contours_yellow, key=cv2.contourArea)
             ((x,y), radius) = cv2.minEnclosingCircle(c)
@@ -101,7 +110,9 @@ def main():
             cv2.circle(frame, (int(x), int(y)), int(radius), (0,255,255), 2)
             cv2.circle(frame, yellow_center, 5, (0, 0, 255), -1)
             red_coordinates.append(yellow_center[1])
-            print("yellow")
+            if "yellow" != current_lego[0]:
+                current_lego[0] = "yellow"
+                print("yellow")
         else:
             print(" ")
 
