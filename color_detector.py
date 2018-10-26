@@ -84,10 +84,10 @@ def main():
             cv2.circle(frame, (int(x), int(y)), int(radius), (0,255,255), 2)
             cv2.circle(frame, red_center, 5, (0, 0, 255), -1)
             red_coordinates.append(red_center[1])
-            # if current_lego != 1:
-            #     current_lego = 1
-            print("red")
-            serialPort.write("4")
+            if current_lego != 1:
+                current_lego = 1
+                print("red")
+                serialPort.write("4")
 
         elif len(contours_blue) > 0:
             c = max(contours_blue, key=cv2.contourArea)
@@ -97,10 +97,10 @@ def main():
             cv2.circle(frame, (int(x), int(y)), int(radius), (0,255,255), 2)
             cv2.circle(frame, blue_center, 5, (0, 0, 255), -1)
             blue_coordinates.append(blue_center[1])
-            # if current_lego != 2:
-            #     current_lego = 2
-            print("blue")
-            serialPort.write("1")
+            if current_lego != 2:
+                current_lego = 2
+                print("blue")
+                serialPort.write("1")
 
         elif len(contours_green) > 0:
             c = max(contours_green, key=cv2.contourArea)
@@ -110,10 +110,10 @@ def main():
             cv2.circle(frame, (int(x), int(y)), int(radius), (0,255,255), 2)
             cv2.circle(frame, green_center, 5, (0, 0, 255), -1)
             green_coordinates.append(green_center[1])
-            # if current_lego != 3:
-            #     current_lego = 3
-            print("green")
-            serialPort.write("3")
+            if current_lego != 3:
+                current_lego = 3
+                print("green")
+                serialPort.write("3")
 
         elif len(contours_yellow) > 0:
             c = max(contours_yellow, key=cv2.contourArea)
@@ -123,10 +123,10 @@ def main():
             cv2.circle(frame, (int(x), int(y)), int(radius), (0,255,255), 2)
             cv2.circle(frame, yellow_center, 5, (0, 0, 255), -1)
             red_coordinates.append(yellow_center[1])
-            # if current_lego != 4:
-            #     current_lego = 4
-            print("yellow")
-            serialPort("2")
+            if current_lego != 4:
+                current_lego = 4
+                print("yellow")
+                serialPort.write("2")
 
         else:
             print(" ")
@@ -151,7 +151,7 @@ def main():
         cv2.imshow('res_blue', res_blue)
         # cv2.imshow('res_green', res_green)
         # cv2.imshow('res_yellow', res_yellow)
-        time.sleep(10)
+        # time.sleep(10)
         print("setp")
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
