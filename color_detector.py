@@ -1,5 +1,6 @@
 import numpy as np
 import cv2
+import time
 # import imutils
 
 
@@ -8,7 +9,11 @@ def main():
     cap = cv2.VideoCapture(0)
     current_lego = 0
 
+
     while(True):
+        # value = input()
+        # if value == "t":
+        #     break
 
         ret,frame = cap.read()
         # gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
@@ -135,8 +140,11 @@ def main():
         cv2.imshow('res_blue', res_blue)
         # cv2.imshow('res_green', res_green)
         # cv2.imshow('res_yellow', res_yellow)
+        time.sleep(10)
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
+
+
 
     cap.release()
     cv2.destroyAllWindows()
