@@ -4,7 +4,7 @@ import time
 import serial
 
 baudRate = 9600
-arduinoComPort = "/dev/ttyACM0"
+arduinoComPort = "/dev/ttyACM1"
 serialPort = serial.Serial(arduinoComPort, baudRate, timeout=1)
 
 
@@ -38,7 +38,7 @@ def main():
         upper_green = np.array([100, 255, 150])
 
         # of yellow
-        lower_yellow = np.array([10, 200, 150])
+        lower_yellow = np.array([0, 80, 70])
         upper_yellow = np.array([255, 255, 255])
 
 
