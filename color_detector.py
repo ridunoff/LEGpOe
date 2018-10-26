@@ -6,7 +6,7 @@ import cv2
 
 def main():
     cap = cv2.VideoCapture(0)
-    current_lego = []
+    current_lego = 0
 
     while(True):
 
@@ -74,8 +74,8 @@ def main():
             cv2.circle(frame, (int(x), int(y)), int(radius), (0,255,255), 2)
             cv2.circle(frame, red_center, 5, (0, 0, 255), -1)
             red_coordinates.append(red_center[1])
-            if "red" != current_lego[0]:
-                current_lego[0] = "red"
+            if current_lego != 1:
+                current_lego = 1
                 print("red")
 
 
@@ -88,8 +88,8 @@ def main():
             cv2.circle(frame, (int(x), int(y)), int(radius), (0,255,255), 2)
             cv2.circle(frame, blue_center, 5, (0, 0, 255), -1)
             blue_coordinates.append(blue_center[1])
-            if "blue" != current_lego[0]:
-                current_lego[0] = "blue"
+            if current_lego != 2:
+                current_lego = 2
                 print("blue")
         elif len(contours_green) > 0:
             c = max(contours_green, key=cv2.contourArea)
@@ -99,8 +99,8 @@ def main():
             cv2.circle(frame, (int(x), int(y)), int(radius), (0,255,255), 2)
             cv2.circle(frame, green_center, 5, (0, 0, 255), -1)
             green_coordinates.append(green_center[1])
-            if "grenn" != current_lego[0]:
-                current_lego[0] = "green"
+            if current_lego != 3:
+                current_lego = 3
                 print("grenn")
         elif len(contours_yellow) > 0:
             c = max(contours_yellow, key=cv2.contourArea)
@@ -110,8 +110,8 @@ def main():
             cv2.circle(frame, (int(x), int(y)), int(radius), (0,255,255), 2)
             cv2.circle(frame, yellow_center, 5, (0, 0, 255), -1)
             red_coordinates.append(yellow_center[1])
-            if "yellow" != current_lego[0]:
-                current_lego[0] = "yellow"
+            if current_lego != 4:
+                current_lego = 4
                 print("yellow")
         else:
             print(" ")
