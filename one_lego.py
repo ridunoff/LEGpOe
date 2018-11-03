@@ -2,14 +2,14 @@ import numpy as np
 import cv2
 
 
-cap = cv2.VideoCapture(1)
+cap = cv2.VideoCapture(0)
 
 while(True):
     # Capture frame-by-frame
     ret, frame = cap.read()
 
     blurred_frame = cv2.GaussianBlur(frame.copy(), (5,5), 0)
-    hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+    hsv = cv2.cvtColor(blurred_frame, cv2.COLOR_BGR2HSV)
 
 
     lower_blue = np.array([110, 50, 50])
@@ -20,7 +20,6 @@ while(True):
     mask_blue = cv2.erode(mask_blue, None, iterations=2)
     mask_blue = cv2.dilate(mask_blue, None, iterations=2)
 
-    
     res_blue = cv2.bitwise_and(frame,frame, mask=mask_blue)
     gray = cv2.cvtColor(res_blue, cv2.COLOR_HSV2BGR)
     gray = cv2.cvtColor(res_blue, cv2.COLOR_BGR2GRAY)
@@ -60,12 +59,10 @@ while(True):
     # edges = cv2.Canny(gray, 50, 175)
     # edges = cv2.dilate(edges, None, iterations=1)
     # edges = cv2.erode(edges, None, iterations=1)
-    
-    
 
     # Display the resulting frame
-    cv2.imshow('frame',mask_blue)
-    cv2.imshow('test', res_blue)
+    cv2.imshow('frame',edges)
+    cv2.imshow('test', mask_blue)
     cv2.imshow('frame2', frame)
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
