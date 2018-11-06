@@ -20,17 +20,33 @@ def main():
 
     while(True):
 
-        ret,frame = cap.read()
-        frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+
+
+        ret, frame = cap.read()
+
+        blurred_frame = cv2.GaussianBlur(frame.copy(), (5,5), 0)
+        hsv = cv2.cvtColor(blurred_frame, cv2.COLOR_BGR2HSV)
+
+        lower_blue = np.array([110, 50, 50])
+        upper_blue = np.array([130, 255, 255])
+
+
+        mask_blue = cv2.inRange(hsv, lower_blue, upper_blue)
+        mask_blue = cv2.erode(mask_blue, None, iterations=2)
+        mask_blue = cv2.dilate(mask_blue, None, iterations=2)
+
+        res_blue = cv2.bitwise_and(frame,frame, mask=mask_blue)
+        gray = cv2.cvtColor(res_blue, cv2.COLOR_HSV2BGR)
+        gray = cv2.cvtColor(res_blue, cv2.COLOR_BGR2GRAY)
 
         min1 = cv2.getTrackbarPos('min', window_name)
         max1 = cv2.getTrackbarPos('max', window_name)
 
-        edges = cv2.Canny(frame,min1,max1)
+        edges = cv2.Canny(gray, min1, max1)
+        edges = cv2.dilate(edges, None, iterations=1)
+        edges = cv2.erode(edges, None, iterations=1)
 
-        cv2.imshow('original', frame)
-        cv2.imshow('edges', edges)
-
+        cv2.imshow('frame',edges)
         cv2.imshow(window_name,cb)
 
 
@@ -43,22 +59,3 @@ def main():
 
 if __name__ == "__main__" :
     main()
-
-
-# cap = cv2.VideoCapture(0)
-#
-# while(True):
-#     # Capture frame-by-frame
-#     ret, frame = cap.read()
-#
-#     # Our operations on the frame come here
-#     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-#
-#     # Display the resulting frame
-#     cv2.imshow('frame',gray)
-#     if cv2.waitKey(1) & 0xFF == ord('q'):
-#         break
-#
-# # When everything done, release the capture
-# cap.release()
-# cv2.destroyAllWindows()

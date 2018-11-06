@@ -17,7 +17,7 @@ def main():
 
 
     while(True):
-        
+
         # value = input()
         # if value == "t":
         #     break
@@ -60,7 +60,7 @@ def main():
         mask_yellow = cv2.inRange(hsv, lower_yellow, upper_yellow)
         mask_yellow = cv2.erode(mask_yellow, None, iterations=2)
         mask_yellow = cv2.dilate(mask_yellow, None, iterations=2)
-        
+
         if i % 50 == 0:
 
             contours_red = cv2.findContours(mask_red.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)[-2]
@@ -92,7 +92,7 @@ def main():
                     current_lego = 1
                     print("red")
                     serialPort.write("4")
-                    
+
 
             elif len(contours_blue) > 0:
                 c = max(contours_blue, key=cv2.contourArea)
@@ -106,7 +106,7 @@ def main():
                     current_lego = 2
                     print("blue")
                     serialPort.write("1")
-                    
+
 
             elif len(contours_green) > 0:
                 c = max(contours_green, key=cv2.contourArea)
@@ -120,7 +120,7 @@ def main():
                     current_lego = 3
                     print("green")
                     serialPort.write("3")
-                    
+
 
             elif len(contours_yellow) > 0:
                 c = max(contours_yellow, key=cv2.contourArea)
@@ -134,7 +134,7 @@ def main():
                     current_lego = 4
                     print("yellow")
                     serialPort.write("2")
-                    
+
             print(" ")
             current_lego = 0
         i += 1
