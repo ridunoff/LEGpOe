@@ -39,9 +39,9 @@ canny_edge_detection = cv2.Canny(threshold_image, 250, 255)
 kernel = np.ones((3,3), np.uint8)
 dilated_image = cv2.dilate(canny_edge_detection,kernel, iterations=1)
 # create window normal size
-cv2.namedWindow("Threshold", cv2.WINDOW_NORMAL)
+cv2.namedWindow("Dilated", cv2.WINDOW_NORMAL)
 # show image in the window
-cv2.imshow("Threshold", dilated_image)
+cv2.imshow("Dilated", dilated_image)
 
 # find the contours
 contours,h = cv2.findContours(dilated_image,cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)[:2]
@@ -50,33 +50,12 @@ c = sorted(contours, key=cv2.contourArea, reverse=True)[:1]
 # draw the largest contour
 cv2.drawContours(image, c, -1, (0,255,0), 3)
 # create window normal size
-cv2.namedWindow("contour", cv2.WINDOW_NORMAL)
+cv2.namedWindow("Contour", cv2.WINDOW_NORMAL)
 # show image in the window
-cv2.imshow("contour", image)
+cv2.imshow("Contour", image)
 
 # area in contour
 area = cv2.contourArea(c[0])
-
-
-# print(type(cv2.contourArea(c)))
-# print(area)
-
-# print(approx)
-# # cv2.drawContours(image, approx, -1, (0,255,0),3)
-# cv2.namedWindow("test_contour", cv2.WINDOW_NORMAL)
-# # show image in the window
-# cv2.imshow("test_contour", image)
-
-
-
-
-
-
-
-
-
-
-
 
 
 
