@@ -4,11 +4,12 @@
 import cv2
 import numpy as np
 import time
-import serial
+# import serial
 
 baudRate = 9600
 # arduinoComPort = "/dev/ttyACM0"
 # serialPort = serial.Serial(arduinoComPort, baudRate, timeout=1)
+
 
 def create_limits(low1,low2,low3,high1,high2,high3):
 
@@ -32,36 +33,34 @@ def find_contours(mask):
 
     return contours, center, coordinates
 
-
 def main():
-    cap = cv2.VideoCapture(1)
-
+    # cap = cv2.VideoCapture(1)
+    # current_lego = 0
     i = 0
     write_code = 0
 
 
-
     while(True):
 
-        ret, frame = cap.read()
+        # ret, frame = cap.read()
+        frame = cv2.imread("/home/anna/LEGpOe/test2_nolight.jpg")
 
         blurred_frame = cv2.GaussianBlur(frame.copy(), (5,5), 0)
         hsv = cv2.cvtColor(blurred_frame, cv2.COLOR_BGR2HSV)
 
 
+        # CHANGED created fuction for limits
         # of red
         lower_red, upper_red = create_limits(0, 110, 110, 10, 255, 255)
-
         # of blue
-        lower_blue, upper_blue = create_limits(110, 50, 50, 130, 255, 255)
-
+        lower_blue, upper_blue = create_limits(85, 27, 46, 165, 168, 77)
         # of green
         lower_green, upper_green = create_limits(30, 50, 0, 100, 255, 150)
-
         # of yellow
         lower_yellow, upper_yellow = create_limits(0, 80, 70, 255, 255, 255)
 
 
+        # CHANGED created function for masks
         mask_red = create_mask(hsv,lower_red,upper_red)
         mask_blue = create_mask(hsv,lower_blue,upper_blue)
         mask_green = create_mask(hsv,lower_green,upper_green)
@@ -71,9 +70,7 @@ def main():
 
             # Image with one lego on tip plate
                 # y and then x
-            image = frame[50:460, 240:450]
-
-
+            image = frame
 
             # create window normal size
             cv2.namedWindow("Original", cv2.WINDOW_NORMAL)
@@ -126,34 +123,79 @@ def main():
 
             # area in contour
             area = cv2.contourArea(c[0])
+            print(area)
 
-            # 2x2
+
             if area > 2500 and area < 4000:
                 write_code = write_code + 2
-
-            #2x4
-            elif area > 5500 and area < 7000:
+            elif area > 26000 and area < 30000:
                 write_code = write_code + 4
 
+
+            # CHANGED made fucton to find contours
             contours_red, red_center, red_coordinates = find_contours(mask_red)
             contours_blue, blue_center, blue_coordinates = find_contours(mask_blue)
             contours_green, green_center, green_coordinates = find_contours(mask_green)
             contours_yellow, yellow_center, yellow_coordinates = find_contours(mask_yellow)
 
             if len(contours_red) > 0:
+
+                # CHANGED delete unnecessary
+                # c = max(contours_red, key=cv2.contourArea)
+                # ((x,y), radius) = cv2.minEnclosingCircle(c)
+                # M = cv2.moments(c)
+                # red_center = (int(M["m10"] / M["m00"]), int(M["m01"] / M["m00"]))
+                # cv2.circle(frame, (int(x), int(y)), int(radius), (0,255,255), 2)
+                # cv2.circle(frame, red_center, 5, (0, 0, 255), -1)
+                # red_coordinates.append(red_center[1])
+
+                    # print("red")
                 write_code = write_code + 10
 
+
+
             elif len(contours_blue) > 0:
-                # unnecessary
-                write_code = write_code + 0
+                print("got here")
+                # c = max(contours_blue, key=cv2.contourArea)
+                # ((x,y), radius) = cv2.minEnclosingCircle(c)
+                # M = cv2.moments(c)
+                # blue_center = (int(M["m10"] / M["m00"]), int(M["m01"] / M["m00"]))
+                # cv2.circle(frame, (int(x), int(y)), int(radius), (0,255,255), 2)
+                # cv2.circle(frame, blue_center, 5, (0, 0, 255), -1)
+                # blue_coordinates.append(blue_center[1])
+                print("blue")
+
+
+                    # print("blue")
+
+
 
             # elif len(contours_green) > 0:
-                # replace 0 with correct number
-            #     write_code = write_code + 0
+            #     c = max(contours_green, key=cv2.contourArea)
+            #     ((x,y), radius) = cv2.minEnclosingCircle(c)
+            #     M = cv2.moments(c)
+            #     green_center = (int(M["m10"] / M["m00"]), int(M["m01"] / M["m00"]))
+            #     cv2.circle(frame, (int(x), int(y)), int(radius), (0,255,255), 2)
+            #     cv2.circle(frame, green_center, 5, (0, 0, 255), -1)
+            #     green_coordinates.append(green_center[1])
+            #     if current_lego != 3:
+            #         current_lego = 3
+            #         print("green")
+            #
             #
             # elif len(contours_yellow) > 0:
-                # replace 0 with correct number
-            #     write_code = write_code + 0
+            #     c = max(contours_yellow, key=cv2.contourArea)
+            #     ((x,y), radius) = cv2.minEnclosingCircle(c)
+            #     M = cv2.moments(c)
+            #     yellow_center = (int(M["m10"] / M["m00"]), int(M["m01"] / M["m00"]))
+            #     cv2.circle(frame, (int(x), int(y)), int(radius), (0,255,255), 2)
+            #     cv2.circle(frame, yellow_center, 5, (0, 0, 255), -1)
+            #     red_coordinates.append(yellow_center[1])
+            #     if current_lego != 4:
+            #         current_lego = 4
+            #         print("yellow")
+
+
 
 
         if write_code == 4:
@@ -172,7 +214,7 @@ def main():
         write_code = 0
         # print(i)
 
-
+        cv2.imshow('frame', frame)
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
 

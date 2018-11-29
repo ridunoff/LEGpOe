@@ -9,13 +9,13 @@ def nothing(x):
 
 def main():
 
-    cap = cv2.VideoCapture(0)
+    # cap = cv2.VideoCapture(0)
 
     window_name = 'color range parameter'
     cv2.namedWindow(window_name)
 
     cb = cv2.imread('lamb.jpg')
-    image = cv2.imread('lego.jpg')
+
     # hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
 
     cv2.createTrackbar('a1',window_name,0,255,nothing)
@@ -28,7 +28,9 @@ def main():
 
     while(True):
 
-        ret,frame = cap.read()
+        # ret,frame = cap.read()
+        frame = cv2.imread("/home/anna/LEGpOe/black.jpg")
+        
         hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
 
         a1 = cv2.getTrackbarPos('a1',window_name)

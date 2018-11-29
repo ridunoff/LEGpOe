@@ -10,6 +10,7 @@ cap = cv2.VideoCapture(1)
 while(True):
     # Capture frame-by-frame
     ret, frame = cap.read()
+    frame = frame[20:460, 150:400]
 
     # Our operations on the frame come here
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)

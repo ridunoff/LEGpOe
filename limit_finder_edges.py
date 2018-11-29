@@ -8,7 +8,7 @@ def nothing(x):
 
 def main():
 
-    cap = cv2.VideoCapture(0)
+    cap = cv2.VideoCapture(1)
 
     window_name = 'color range parameter'
     cv2.namedWindow(window_name)
@@ -24,7 +24,7 @@ def main():
 
         ret, frame = cap.read()
 
-        blurred_frame = cv2.GaussianBlur(frame.copy(), (5,5), 0)
+        blurred_frame = cv2.GaussianBlur(frame.copy(), (7,7), 0)
         hsv = cv2.cvtColor(blurred_frame, cv2.COLOR_BGR2HSV)
 
         lower_blue = np.array([110, 50, 50])
@@ -46,6 +46,7 @@ def main():
         edges = cv2.dilate(edges, None, iterations=1)
         edges = cv2.erode(edges, None, iterations=1)
 
+        cv2.imshow('image',frame)
         cv2.imshow('frame',edges)
         cv2.imshow(window_name,cb)
 
