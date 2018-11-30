@@ -605,6 +605,8 @@ h1, h2, h3, h4, h5, h6 {
   -ms-border-radius: 30px;
   border-radius: 30px;
 }
+
+
 .testimony-entry .feed-bubble:after {
   position: absolute;
   bottom: -10px;
@@ -618,13 +620,33 @@ h1, h2, h3, h4, h5, h6 {
 }
 .testimony-entry .feed-bubble p {
   color: #fff;
+
+}
+
+/*.text1 {
+     position: absolute;
 }
 .text2 {
-     display: none;
+     position:absolute;
+     color:transparent;
 }
-.testimony-entry > a:hover .text2 {
-     display: block;
+
+.row .col-md-4  div:hover .text2 {
+   color : white;
+   -webkit-transition: color 5s;
+   transition: 5s;
+   display: block;
 }
+
+.row .col-md-4  div:hover .text1 {
+ color:transparent;
+ -webkit-transition: color .5s;
+ transition: .5s;
+
+}
+*/
+
+
 /*
 I want the testimony to change from text1 to text2 when it is hovered over the
 feed-bubble but I can't get it to work.
