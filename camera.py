@@ -4,22 +4,40 @@ import numpy as np
 import cv2
 
 
-# 0 for computer camera, 1 for external camera
-cap = cv2.VideoCapture(1)
+def nothing(x):
+    pass
 
-while(True):
-    # Capture frame-by-frame
-    ret, frame = cap.read()
-    frame = frame[20:460, 150:400]
 
-    # Our operations on the frame come here
-    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
-    # Display the resulting frame
-    cv2.imshow('frame',gray)
-    if cv2.waitKey(1) & 0xFF == ord('q'):
-        break
+def main():
+# 0 for computer camera, 1 for externalcap = cv2.VideoCapture(1)
 
-# When everything done, release the capture
-cap.release()
-cv2.destroyAllWindows()
+    cap = cv2.VideoCapture(1)
+
+
+
+
+    while(True):
+        # Capture frame-by-frame
+
+
+        ret, frame = cap.read()
+        # frame = frame[158:370,100:410]
+        frame = frame[85:380,100:500]
+
+
+        # Our operations on the frame come here
+        gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+
+        # Display the resulting frame
+        cv2.imshow('frame',gray)
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            break
+
+    # When everything done, release the capture
+    cap.release()
+    cv2.destroyAllWindows()
+
+
+if __name__ == "__main__" :
+    main()

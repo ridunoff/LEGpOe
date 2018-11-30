@@ -21,10 +21,10 @@ void loop() {
     // read the incoming byte:
     sensorColorString = Serial.readString();
     Serial.setTimeout(10);
-    
+
     Serial.print("I received: ");
-    Serial.println(sensorColorString); 
-    
+    Serial.println(sensorColorString);
+
     sensorValue = sensorColorString.toInt(); //Converts the recieved string to an int
 
     tiltServo.write(95); //Sets home position of the tiltServo to 95
@@ -51,28 +51,28 @@ void testServo2(){
 void colorToServoValue(){   //Converts the Raspberry Pi output to positions of the servos
    Serial.print(sensorValue);
    if(sensorValue == 1){
-      tiltServoPos = 120;   
+      tiltServoPos = 120;
       spinServoPos = 5;
       spinServo.write(spinServoPos);
       delay(2000);
       tiltServo.write(tiltServoPos);
    }
    if(sensorValue == 2){
-      tiltServoPos = 120;   
+      tiltServoPos = 120;
       spinServoPos = 90;
       spinServo.write(spinServoPos);
       delay(2000);
       tiltServo.write(tiltServoPos);
    }
    if(sensorValue == 3){
-      tiltServoPos = 70;   
+      tiltServoPos = 70;
       spinServoPos = 5;
       spinServo.write(spinServoPos);
       delay(2000);
       tiltServo.write(tiltServoPos);
    }
    if(sensorValue == 4){
-      tiltServoPos = 70;   
+      tiltServoPos = 70;
       spinServoPos = 90;
       spinServo.write(spinServoPos);
       delay(2000);
