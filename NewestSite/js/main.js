@@ -180,11 +180,23 @@
 		} , { offset: '85%' } );
 	};
 
-	// Get the modal
+	// Get the modal 1
 	var modal = document.getElementById('myModal');
-
-	// Get the button that opens the modal
+	// Get the button that opens the modal 1
 	var btn = document.getElementById("myBtn");
+
+	// Get the modal 2
+	var modal = document.getElementById('myModal2');
+	// Get the button that opens the modal 2
+	var btn = document.getElementById("myBtn2");
+
+
+
+
+
+
+
+
 
 	// Get the <span> element that closes the modal
 	var span = document.getElementsByClassName("close")[0];
@@ -205,6 +217,8 @@
 	        modal.style.display = "none";
 	    }
 	}
+
+
 
 	// Document on load.
 	$(function(){
