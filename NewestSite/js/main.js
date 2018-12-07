@@ -406,6 +406,49 @@
 			}
 	}
 
+	// Get the modal 10
+	var modal10 = document.getElementById('myModal10');
+	// Get the button that opens the modal 3
+	var btn10 = document.getElementById("myBtn10");
+
+	// Get the <span> element that closes the modal
+	var span10 = document.getElementById("close10");
+
+	// When the user clicks on the button, open the modal
+	btn10.onclick = function() {
+			modal10.style.display = "block";
+	}
+
+	// When the user clicks on <span> (x), close the modal
+	span10.onclick = function() {
+			modal10.style.display = "none";
+	}
+
+	// Get the modal 11
+	var modal11 = document.getElementById('myModal11');
+	// Get the button that opens the modal 3
+	var btn11 = document.getElementById("myBtn11");
+
+	// Get the <span> element that closes the modal
+	var span11 = document.getElementById("close11");
+
+	// When the user clicks on the button, open the modal
+	btn11.onclick = function() {
+			modal11.style.display = "block";
+	}
+
+	// When the user clicks on <span> (x), close the modal
+	span11.onclick = function() {
+			modal11.style.display = "none";
+	}
+
+	// When the user clicks anywhere outside of the modal, close it
+	window.onclick = function(event) {
+			if (event.target == modal11) {
+					modal11.style.display = "none";
+			}
+	}
+
 	// Document on load.
 	$(function(){
 
