@@ -87,6 +87,8 @@ h1, h2, h3, h4, h5, h6 {
   background: #00ADB5;
 }
 
+
+
 #fh5co-header {
   position: absolute;
   z-index: 99;
@@ -370,7 +372,7 @@ h1, h2, h3, h4, h5, h6 {
   background: rgba(0, 0, 0, 0.5);
 }
 #fh5co-home, #fh5co-home .text-wrap {
-  height: 900px;
+  height: 500px;
 }
 #fh5co-home .text-wrap {
   display: table;
@@ -652,9 +654,16 @@ I want the testimony to change from text1 to text2 when it is hovered over the
 feed-bubble but I can't get it to work.
 */
 
-.testimony-entry .author-img {
-  width: 75px;
-  height: 75px;
+.real {
+  opacity:1;
+}
+
+.lego{
+  opacity:1;
+}
+.testimony-entry .author-img{
+  width: 115px;
+  height: 115px;
   background-size: cover;
   background-position: center center;
   position: relative;
@@ -665,6 +674,13 @@ feed-bubble but I can't get it to work.
   -ms-border-radius: 50%;
   border-radius: 50%;
 }
+
+
+.lego:hover {
+  opacity:0;
+}
+
+
 .testimony-entry .user {
   font-size: 18px;
   color: #000;
