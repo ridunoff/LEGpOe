@@ -656,6 +656,7 @@ feed-bubble but I can't get it to work.
 
 .real {
   opacity:1;
+
 }
 
 .lego{
@@ -666,7 +667,7 @@ feed-bubble but I can't get it to work.
   height: 115px;
   background-size: cover;
   background-position: center center;
-  position: relative;
+  position: absolute;
   float: left;
   margin-right: 20px;
   -webkit-border-radius: 50%;
@@ -674,7 +675,9 @@ feed-bubble but I can't get it to work.
   -ms-border-radius: 50%;
   border-radius: 50%;
 }
-
+.teammate{
+  position:relative;
+}
 
 .lego:hover {
   opacity:0;
@@ -684,10 +687,12 @@ feed-bubble but I can't get it to work.
 .testimony-entry .user {
   font-size: 18px;
   color: #000;
+  margin-left:40%;
 }
 .testimony-entry .user small {
   font-size: 14px;
   color: #8f989f !important;
+  margin-left:40%;
 }
 
 .fh5co-blog .blog {
