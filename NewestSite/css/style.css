@@ -369,7 +369,7 @@ h1, h2, h3, h4, h5, h6 {
   left: 0;
   right: 0;
   z-index: 2;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.25);
 }
 #fh5co-home, #fh5co-home .text-wrap {
   height: 500px;
@@ -1512,6 +1512,7 @@ feed-bubble but I can't get it to work.
     text-decoration: none;
     cursor: pointer;
 }
+
 
 
 /*# sourceMappingURL=style.css.map */
