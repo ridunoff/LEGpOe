@@ -87,6 +87,8 @@ h1, h2, h3, h4, h5, h6 {
   background: #00ADB5;
 }
 
+
+
 #fh5co-header {
   position: absolute;
   z-index: 99;
@@ -370,7 +372,7 @@ h1, h2, h3, h4, h5, h6 {
   background: rgba(0, 0, 0, 0.5);
 }
 #fh5co-home, #fh5co-home .text-wrap {
-  height: 900px;
+  height: 500px;
 }
 #fh5co-home .text-wrap {
   display: table;
@@ -537,6 +539,17 @@ h1, h2, h3, h4, h5, h6 {
   position: relative;
   height: 300px;
 }
+.fh5co-portfolio .portfolio-bigimg {
+  width: 100%;
+  float: left;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  position: relative;
+  height: 800px;
+}
+
+
 @media screen and (max-width: 768px) {
   .fh5co-portfolio .portfolio-entry {
     height: 400px;
@@ -652,12 +665,20 @@ I want the testimony to change from text1 to text2 when it is hovered over the
 feed-bubble but I can't get it to work.
 */
 
-.testimony-entry .author-img {
-  width: 75px;
-  height: 75px;
+.real {
+  opacity:1;
+
+}
+
+.lego{
+  opacity:1;
+}
+.testimony-entry .author-img{
+  width: 115px;
+  height: 115px;
   background-size: cover;
   background-position: center center;
-  position: relative;
+  position: absolute;
   float: left;
   margin-right: 20px;
   -webkit-border-radius: 50%;
@@ -665,13 +686,24 @@ feed-bubble but I can't get it to work.
   -ms-border-radius: 50%;
   border-radius: 50%;
 }
+.teammate{
+  position:relative;
+}
+
+.lego:hover {
+  opacity:0;
+}
+
+
 .testimony-entry .user {
   font-size: 18px;
   color: #000;
+  margin-left:40%;
 }
 .testimony-entry .user small {
   font-size: 14px;
   color: #8f989f !important;
+  margin-left:40%;
 }
 
 .fh5co-blog .blog {
@@ -1480,6 +1512,7 @@ feed-bubble but I can't get it to work.
     text-decoration: none;
     cursor: pointer;
 }
+
 
 
 /*# sourceMappingURL=style.css.map */
